@@ -4,11 +4,32 @@
 			"image": "diamond.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 1804,
+				"w": 1899,
 				"h": 1147
 			},
 			"scale": 1,
 			"frames": [
+				{
+					"filename": "0diamondfinish.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 327,
+						"h": 337
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 1,
+						"w": 327,
+						"h": 336
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 327,
+						"h": 336
+					}
+				},
 				{
 					"filename": "1diamondstart.png",
 					"rotated": false,
@@ -24,7 +45,7 @@
 						"h": 372
 					},
 					"frame": {
-						"x": 1,
+						"x": 330,
 						"y": 1,
 						"w": 390,
 						"h": 372
@@ -45,7 +66,7 @@
 						"h": 372
 					},
 					"frame": {
-						"x": 393,
+						"x": 722,
 						"y": 1,
 						"w": 390,
 						"h": 372
@@ -66,7 +87,7 @@
 						"h": 372
 					},
 					"frame": {
-						"x": 785,
+						"x": 1114,
 						"y": 1,
 						"w": 392,
 						"h": 372
@@ -87,7 +108,7 @@
 						"h": 372
 					},
 					"frame": {
-						"x": 1179,
+						"x": 1508,
 						"y": 1,
 						"w": 390,
 						"h": 372
@@ -267,6 +288,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:2858ee1309d1abeaba5ff0c2b6c5336d:13d51bba3065fc516501ee50b5875064:705052c6a040f848fc5007c977cd7b91$"
+		"smartupdate": "$TexturePacker:SmartUpdate:8f27c7f6f6f58cc93df2d0bea621112c:97961591f49f3ff19dcdecac5b380d70:705052c6a040f848fc5007c977cd7b91$"
 	}
 }

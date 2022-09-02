@@ -105,6 +105,9 @@ class SceneMain extends Phaser.Scene {
             }, {
                 key: 'diamond',
                 frame: '12diamondfinish.png'
+            },{
+                key: 'diamond',
+                frame: '0diamondfinish.png'
             },],
             frameRate: 10,
             repeat: 0
