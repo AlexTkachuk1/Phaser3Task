@@ -38,8 +38,7 @@ class SceneMain extends Phaser.Scene {
             ease: 'Power1',      
             duration: 1200,
             repeat: 0,       
-            yoyo: false,
-            offset: '1500'
+            yoyo: false
         });
         this.anims.create({
             key: 'Start',
