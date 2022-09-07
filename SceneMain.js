@@ -20,7 +20,6 @@ class SceneMain extends Phaser.Scene {
             targets:this.jDiamond,
             scaleX:1.3,
             scaleY:1.3,
-
             ease:"Power1",
             duration:1200,
             onComplete:function(){
