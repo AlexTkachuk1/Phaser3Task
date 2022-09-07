@@ -8,7 +8,7 @@ class SceneMain extends Phaser.Scene {
     }
 
     create() {
-        var diamond = this.physics.add.sprite(950, 600, "diamond");
+        var diamond = this.add.sprite(950, 600, "diamond");
         this.jDiamond = diamond;
         this.scale = 0.5;
         this.canScale = true;
