@@ -30,6 +30,7 @@ class SceneMain extends Phaser.Scene {
         var timeline = this.tweens.createTimeline();
         timeline.add({
             targets: this.jDiamond,
+            delay: 580,
             scaleX:0.3,
             scaleY:0.3,
             x: 700,
@@ -38,7 +39,7 @@ class SceneMain extends Phaser.Scene {
             duration: 1200,
             repeat: 0,       
             yoyo: false,
-            offset: '-=100'
+            offset: '1500'
         });
         this.anims.create({
             key: 'Start',
@@ -115,7 +116,7 @@ class SceneMain extends Phaser.Scene {
                 key: 'diamond',
                 frame: '0diamondfinish.png'
             },],
-            frameRate: 10,
+            frameRate: 8,
             repeat: 0
         });
 
@@ -125,7 +126,7 @@ class SceneMain extends Phaser.Scene {
 
 
     update() {
-        
+
     }
 }
 
