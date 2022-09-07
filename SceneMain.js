@@ -7,25 +7,12 @@ class SceneMain extends Phaser.Scene {
         this.load.atlas("diamond", "/img/diamond.png", "/img/diamond.json");
     }
 
-    // Я принял решение сделать одну большую анимацие вместо трех раздельных, по той причине, что бриллиант не является
-    // игровым персонажем , соответственно создавать анимации для разных состояний и переключаться между состояниями 
-    // в данном случае черезмерно.
-
     create() {
         var diamond = this.physics.add.sprite(950, 600, "diamond");
         this.jDiamond = diamond;
         this.scale = 0.5;
-        this.jDiamond.setScale(this.scale);
-        var tween = this.tweens.add({
-            targets:this.jDiamond,
-            scaleX:1.3,
-            scaleY:1.3,
-            ease:"Power1",
-            duration:1200,
-            onComplete:function(){
-                tween.remove();
-            }
-        });
+        this.canScale = true;
+
         var timeline = this.tweens.createTimeline();
         this.Timeline = timeline;
         timeline.add({
@@ -113,7 +100,7 @@ class SceneMain extends Phaser.Scene {
                 frame: '12diamondfinish.png'
             }, {
                 key: 'diamond',
-                frame: '0diamondfinish.png'
+                frame: '13diamondfinish.png'
             },],
             frameRate: 8,
             repeat: 0
@@ -122,11 +109,16 @@ class SceneMain extends Phaser.Scene {
         this.jDiamond.play("Start");
     }
 
-
-
     update() {
         if (this.jDiamond.frame.name === "8diamondmidle.png") {
             this.Timeline.play();
+        }
+        if (this.scale < 1.3 && this.canScale) {
+            if(this.jDiamond.frame.name === '5diamondmidle.png'){
+                this.canScale = false;
+            }
+            this.jDiamond.setScale(this.scale);
+            this.scale += 0.014;
         }
     }
 }
@@ -137,17 +129,11 @@ const config = {
     height: 1200,
     backgroundColor: "#88F",
     parent: "game-container",
-    physics: {
-        default: "arcade",
-        arcade: {
-            debug: false,
-            gravity: { y: 0 }
-        }
-    },
     scale: {
         "mode": Phaser.Scale.FIT,
         "autoCenter": Phaser.Scale.CENTER_BOTH
     },
     scene: SceneMain
 };
+
 const game = new Phaser.Game(config);
