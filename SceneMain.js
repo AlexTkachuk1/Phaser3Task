@@ -23,14 +23,14 @@ class SceneMain extends Phaser.Scene {
             ease:"Power1",
             duration:1200,
             onComplete:function(){
-                timeline.play();
                 tween.remove();
             }
         });
         var timeline = this.tweens.createTimeline();
+        this.Timeline = timeline;
         timeline.add({
             targets: this.jDiamond,
-            delay: 580,
+            delay: 0,
             scaleX:0.3,
             scaleY:0.3,
             x: 700,
@@ -125,7 +125,9 @@ class SceneMain extends Phaser.Scene {
 
 
     update() {
-
+        if (this.jDiamond.frame.name === "8diamondmidle.png") {
+            this.Timeline.play();
+        }
     }
 }
 
