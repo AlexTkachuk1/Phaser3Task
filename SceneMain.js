@@ -12,10 +12,12 @@ class SceneMain extends Phaser.Scene {
     // в данном случае черезмерно.
 
     create() {
-        this.jDiamond = this.physics.add.sprite(950, 600, "diamond");
+        var diamond = this.physics.add.sprite(950, 600, "diamond");
+        this.jDiamond = diamond;
+        this.scale = 0.5;
+
         this.canScale = true;
         this.canMove = false;
-        this.scale = 0.5;
         this.finishAnimation = false;
         this.anims.create({
             key: 'Start',
@@ -103,18 +105,22 @@ class SceneMain extends Phaser.Scene {
 
     update() {
         if (this.jDiamond.frame.name === "8diamondmidle.png") {
-            this.canMove = true;
+            var tween = this.tweens.add({
+                targets:this.jDiamond,
+                scaleX:0.3,
+                scaleY:0.3,
+                x: 700,
+                y:200,
+                ease:"Power1",
+                duration:1200,
+                onComplete:function(){
+                    tween.remove();
+                }
+            });
         }
         if (this.scale < 1.3 && this.canScale) {
             this.jDiamond.setScale(this.scale);
             this.scale += 0.014;
-        }
-        if (this.canMove &&
-            this.scale > 0.4) {
-            this.canScale = false;
-            this.physics.moveTo(this.jDiamond, this.jDiamond.x-100, this.jDiamond.y-200, 500);
-            this.jDiamond.setScale(this.scale);
-            this.scale -= 0.017;
         }
     }
 }
