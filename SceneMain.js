@@ -40,10 +40,8 @@ class SceneMain extends Phaser.Scene {
         image3.play("Finish");
 
         let timeline = this.tweens.timeline({
-
             ease: 'Power2',
             duration: 2000,
-
             tweens: [{
                 targets: image1,
                 scaleX: 1.5,
