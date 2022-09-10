@@ -4,126 +4,84 @@ class SceneMain extends Phaser.Scene {
     }
 
     preload() {
-        this.load.atlas("diamond", "/img/diamond.png", "/img/diamond.json");
+        this.load.spritesheet("diamondStartAnimation", "/img/bri_big_anim_start.png", { frameWidth: 393, frameHeight: 372 });
+        this.load.spritesheet("diamondMiddleAnimation", "/img/bri_big_anim_middle.png", { frameWidth: 449, frameHeight: 432 });
+        this.load.spritesheet("diamondFinishAnimation", "/img/bri_big_anim_finish.png", { frameWidth: 326, frameHeight: 337 });
+
     }
 
     create() {
-        var diamond = this.add.sprite(950, 600, "diamond");
-        this.jDiamond = diamond;
-        this.scale = 0.5;
-        this.canScale = true;
+        let image1 = this.add.sprite(1000, 600, 'diamondStartAnimation').setScale(0.3);
+        let image2 = this.add.sprite(1000, 600, 'diamondMiddleAnimation').setScale(1.3);
+        image2.setAlpha(0);
+        let image3 = this.add.sprite(1000, 600, 'diamondFinishAnimation');
+        image3.setAlpha(0);
 
-        var timeline = this.tweens.createTimeline();
-        this.Timeline = timeline;
-        timeline.add({
-            targets: this.jDiamond,
-            delay: 0,
-            scaleX:0.3,
-            scaleY:0.3,
-            x: 700,
-            y:200,            
-            ease: 'Power1',      
-            duration: 1200,
-            repeat: 0,       
-            yoyo: false
+        this.anims.create({
+            key: "Start",
+            frames: this.anims.generateFrameNumbers("diamondStartAnimation"),
+            frameRate: 8,
+            repeat: -1
         });
         this.anims.create({
-            key: 'Start',
-            frames: [{
-                key: 'diamond',
-                frame: '1diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '2diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '3diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '4diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '1diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '2diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '3diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '4diamondstart.png'
-            }, {
-                key: 'diamond',
-                frame: '5diamondmidle.png'
-            }, {
-                key: 'diamond',
-                frame: '6diamondmidle.png'
-            }, {
-                key: 'diamond',
-                frame: '7diamondmidle.png'
-            }, {
-                key: 'diamond',
-                frame: '5diamondmidle.png'
-            }, {
-                key: 'diamond',
-                frame: '6diamondmidle.png'
-            }, {
-                key: 'diamond',
-                frame: '7diamondmidle.png'
-            }, {
-                key: 'diamond',
-                frame: '8diamondmidle.png'
-            }, {
-                key: 'diamond',
-                frame: '9diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '10diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '11diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '12diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '9diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '10diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '11diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '12diamondfinish.png'
-            }, {
-                key: 'diamond',
-                frame: '13diamondfinish.png'
-            },],
+            key: "Middle",
+            frames: this.anims.generateFrameNumbers("diamondMiddleAnimation"),
             frameRate: 8,
-            repeat: 0
+            repeat: -1
         });
+        this.anims.create({
+            key: "Finish",
+            frames: this.anims.generateFrameNumbers("diamondFinishAnimation"),
+            frameRate: 8,
+            repeat: -1
+        });
+        image1.play("Start");
+        image2.play("Middle");
+        image3.play("Finish");
 
-        this.jDiamond.play("Start");
+        let timeline = this.tweens.timeline({
+
+            ease: 'Power2',
+            duration: 2000,
+
+            tweens: [{
+                targets: image1,
+                scaleX: 1.5,
+                scaleY: 1.5,
+                onComplete: function () {
+                    image1.setAlpha(0);
+                    image2.setAlpha(1);
+                },
+                duration: 2000,
+            },
+            {
+                targets: image2,
+                onComplete: function () {
+                    image2.destroy();
+                    image3.setAlpha(1);
+                },
+                offset: 4000
+            },
+            {
+                targets: image3,
+                scaleX: 0.3,
+                scaleY: 0.3,
+                x: 700,
+                y: 200,
+                duration: 2000,
+                onComplete: function () {
+                    image3.anims.complete();
+                },
+                offset: 4000
+            }]
+        });
     }
 
     update() {
-        if (this.jDiamond.frame.name === "8diamondmidle.png") {
-            this.Timeline.play();
-        }
-        if (this.scale < 1.3 && this.canScale) {
-            if(this.jDiamond.frame.name === '5diamondmidle.png'){
-                this.canScale = false;
-            }
-            this.jDiamond.setScale(this.scale);
-            this.scale += 0.014;
-        }
     }
 }
 
-const config = {
+let config = {
     type: Phaser.AUTO,
     width: 2000,
     height: 1200,
@@ -136,4 +94,4 @@ const config = {
     scene: SceneMain
 };
 
-const game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
